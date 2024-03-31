@@ -8,9 +8,12 @@ void Mesh::Init(vector<Vertex>& vec, vector<uint32>& index)
 	CreateVertxBuffer(vec);
 	CreateIndexBuffer(index);
 
+<<<<<<< HEAD
 
-	_transform.offset = Vec4(0.0, 0.3f, 0.0f, 0.0f);
+	_transform.offset = Vec4(30.0f, 30.0f, 30.0f, 0.0f);
 
+=======
+>>>>>>> parent of be4d8ea (상수버퍼뷰 이용)
 }
 
 void Mesh::Render()
@@ -18,10 +21,13 @@ void Mesh::Render()
 	CORE->GetCmdList()->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 	CORE->GetCmdList()->IASetVertexBuffers(0, 1, &_vertexBufferView); // Slot: (0~15)
 	CORE->GetCmdList()->IASetIndexBuffer(&_indexBufferView);
+<<<<<<< HEAD
 
-	CORE->GetConstantBuffer()->PushData(0, &_transform, sizeof(_transform));
-	CORE->GetConstantBuffer()->PushData(1, &_transform, sizeof(_transform));
-
+	////CORE->GetConstantBuffer()->PushData(0, &_transform, sizeof(_transform));
+	//CORE->GetConstantBuffer()->PushData(1, &_transform, sizeof(_transform));
+	CORE->GetConstantBuffer()->PushCvData(3, &_transform, sizeof(_transform));
+=======
+>>>>>>> parent of be4d8ea (상수버퍼뷰 이용)
 	CORE->GetCmdList()->DrawIndexedInstanced(_indexCount, 1, 0, 0,0);
 }
 
