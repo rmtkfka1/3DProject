@@ -55,6 +55,9 @@
     <ClInclude Include="Mesh.h">
       <Filter>Engien\Resource</Filter>
     </ClInclude>
+    <ClInclude Include="ConstantBuffer.h">
+      <Filter>Engien</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="client.rc">
@@ -90,6 +93,9 @@
     </ClCompile>
     <ClCompile Include="Mesh.cpp">
       <Filter>Engien\Resource</Filter>
+    </ClCompile>
+    <ClCompile Include="ConstantBuffer.cpp">
+      <Filter>Engien</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

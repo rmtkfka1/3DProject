@@ -5,7 +5,7 @@ class Mesh
 public:
 	void Init(vector<Vertex>& vec,vector<uint32>& index);
 	void Render();
-
+	void SetTransform(Transform transform) { _transform = transform; }
 
 private:
 	void CreateVertxBuffer(vector<Vertex>& vec);
@@ -21,5 +21,7 @@ private:
 	ComPtr<ID3D12Resource>		_indexBuffer;
 	D3D12_INDEX_BUFFER_VIEW	_indexBufferView = {};
 	uint32 _indexCount = 0;
+
+	Transform _transform = {};
 };
 

@@ -13,14 +13,11 @@ public:
 
 	void Clear();
 	void PushData(int32 rootParamIndex, void* buffer, uint32 size);
-	void PushCvData(int32 rootParamIndex, void* buffer, uint32 size);
 
 	D3D12_GPU_VIRTUAL_ADDRESS GetGpuVirtualAddress(uint32 index);
 
 private:
-	void CreateBufferView();
 	void CreateBuffer();
-
 
 private:
 	ComPtr<ID3D12Resource>	_cbvBuffer;
