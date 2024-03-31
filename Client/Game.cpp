@@ -43,6 +43,8 @@ void Game::Render()
 	CORE->RenderBegin();
 
 	_shader->SetPipelineState();
+
+
 	_mesh->Render();
 
 	CORE->RenderEnd();

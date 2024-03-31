@@ -16,6 +16,9 @@ void Core::Init(const WindowInfo& info)
 	CreateRTVBuffer();
 	CreateRootSignature();
 
+	_constantBuffer = make_shared<ConstantBuffer>();
+	_constantBuffer->Init(sizeof(Transform), 256);
+
 
 }
 
@@ -28,6 +31,9 @@ void Core::RenderBegin()
 		_rtvBuffer[_backBufferIndex].Get(),
 		D3D12_RESOURCE_STATE_PRESENT, 
 		D3D12_RESOURCE_STATE_RENDER_TARGET); 
+
+	_cmdList->SetGraphicsRootSignature(_rootSignature.Get());
+	_constantBuffer->Clear();
 
 	_cmdList->ResourceBarrier(1, &barrier);
 
@@ -178,7 +184,12 @@ void Core::CreateRTVBuffer()
 void Core::CreateRootSignature()
 {
 
-	D3D12_ROOT_SIGNATURE_DESC sigDesc = CD3DX12_ROOT_SIGNATURE_DESC(D3D12_DEFAULT);
+
+	CD3DX12_ROOT_PARAMETER param[2];
+	param[0].InitAsConstantBufferView(3);
+	param[1].InitAsConstantBufferView(4);
+
+	D3D12_ROOT_SIGNATURE_DESC sigDesc = CD3DX12_ROOT_SIGNATURE_DESC(2,param);
 	sigDesc.Flags = D3D12_ROOT_SIGNATURE_FLAG_ALLOW_INPUT_ASSEMBLER_INPUT_LAYOUT; // 입력 조립기 단계
 
 	ComPtr<ID3DBlob> blobSignature;

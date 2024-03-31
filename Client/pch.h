@@ -79,6 +79,11 @@ struct WindowInfo
 	HWND hwnd;
 };
 
+struct Transform
+{
+	Vec4 offset;
+};
+
 enum
 {
 	SWAP_CHAIN_BUFFER_COUNT = 2,

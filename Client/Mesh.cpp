@@ -8,6 +8,9 @@ void Mesh::Init(vector<Vertex>& vec, vector<uint32>& index)
 	CreateVertxBuffer(vec);
 	CreateIndexBuffer(index);
 
+
+	_transform.offset = Vec4(0.0, 0.3f, 0.0f, 0.0f);
+
 }
 
 void Mesh::Render()
@@ -15,6 +18,10 @@ void Mesh::Render()
 	CORE->GetCmdList()->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 	CORE->GetCmdList()->IASetVertexBuffers(0, 1, &_vertexBufferView); // Slot: (0~15)
 	CORE->GetCmdList()->IASetIndexBuffer(&_indexBufferView);
+
+	CORE->GetConstantBuffer()->PushData(0, &_transform, sizeof(_transform));
+	CORE->GetConstantBuffer()->PushData(1, &_transform, sizeof(_transform));
+
 	CORE->GetCmdList()->DrawIndexedInstanced(_indexCount, 1, 0, 0,0);
 }
 

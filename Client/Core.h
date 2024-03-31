@@ -1,5 +1,5 @@
 #pragma once
-
+#include "ConstantBuffer.h"
 
 class Core
 {
@@ -19,6 +19,7 @@ public:
 	ComPtr<ID3D12RootSignature> GetRootSignature() { return _rootSignature; }
 	ComPtr<ID3D12Device> GetDevice() { return _device; }
 	ComPtr<ID3D12GraphicsCommandList> GetCmdList() { return _cmdList; }
+	shared_ptr<ConstantBuffer> GetConstantBuffer() { return _constantBuffer; }
 private:
 	Core() {};
 	~Core() {};
@@ -60,6 +61,9 @@ private:
 	uint8 _backBufferIndex = 0;
 
 	ComPtr<ID3D12RootSignature> _rootSignature;
+
+
+	shared_ptr<ConstantBuffer> _constantBuffer;
 
 };
 
