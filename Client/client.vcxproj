@@ -149,6 +149,7 @@
     <ClInclude Include="Core.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="Game.h" />
+    <ClInclude Include="KeyManager.h" />
     <ClInclude Include="Mesh.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="Resource.h" />
@@ -156,6 +157,7 @@
     <ClInclude Include="SimpleMath.h" />
     <ClInclude Include="TableDescriptorHeap.h" />
     <ClInclude Include="targetver.h" />
+    <ClInclude Include="Time.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="client.cpp" />
@@ -163,6 +165,7 @@
     <ClCompile Include="ConstantBufferTable.cpp" />
     <ClCompile Include="Core.cpp" />
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="KeyManager.cpp" />
     <ClCompile Include="Mesh.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
@@ -171,6 +174,7 @@
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="SimpleMath.cpp" />
     <ClCompile Include="TableDescriptorHeap.cpp" />
+    <ClCompile Include="Time.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="client.rc" />

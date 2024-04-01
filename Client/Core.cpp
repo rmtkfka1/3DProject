@@ -28,6 +28,11 @@ void Core::Init(const WindowInfo& info)
 
 }
 
+void Core::Update()
+{
+	ShowFps();
+}
+
 void Core::RenderBegin()
 {
 	_cmdMemory->Reset();
@@ -109,6 +114,18 @@ void Core::WaitSync()
 		// Wait until the GPU hits current fence event is fired.
 		::WaitForSingleObject(_fenceEvent, INFINITE);
 	}
+}
+
+void Core::ShowFps()
+{
+
+	uint32 fps =TimeManager::GetInstance()->GetFps();
+
+	WCHAR text[100] = L"";
+	::wsprintf(text, L"FPS : %d", fps);
+
+	::SetWindowText(_info.hwnd, text);
+
 }
 
 void Core::CreateDevice()

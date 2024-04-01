@@ -7,7 +7,7 @@ void Game::Init(const WindowInfo& info)
 {
 	_windowInfo = info;
 
-	CORE->Init(info);
+	core->Init(info);
 
 	_mesh = make_shared<Mesh>();
 	_shader = make_shared<Shader>();
@@ -27,26 +27,31 @@ void Game::Init(const WindowInfo& info)
 	_mesh->Init(vec,index);
 	_shader->Init(L"..\\Resource\\Default.hlsl");
 
+	TimeManager::GetInstance()->Init();
+	KeyManager::GetInstance()->Init(_windowInfo.hwnd);
+
 }
 
 void Game::Update()
 {
 
+	KeyManager::GetInstance()->Update();
+	TimeManager::GetInstance()->Update();
 
-
+	core->Update();
 
 }
 
 void Game::Render()
 {
 
-	CORE->RenderBegin();
+	core->RenderBegin();
 
 	_shader->SetPipelineState();
 
 
 	_mesh->Render();
 
-	CORE->RenderEnd();
+	core->RenderEnd();
 
 }

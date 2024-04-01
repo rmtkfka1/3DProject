@@ -8,13 +8,10 @@ class Core
 
 public:
 	
-	static Core* GetInstance()
-	{
-		static Core mm;
-		return &mm;
-	}
+
 
 	void Init(const WindowInfo& info);
+	void Update();
 	void RenderBegin();
 	void RenderEnd();
 
@@ -26,11 +23,12 @@ public:
 	shared_ptr<TableDescriptorHeap> GetTableDescriptorHeap() { return _tableDescriptorHeap; }
 
 private:
-	Core() {};
-	~Core() {};
+	
 
 	void ResizeWIndow();
 	void WaitSync();
+	void ShowFps();
+
 
 	//장치초기화
 	void CreateDevice();

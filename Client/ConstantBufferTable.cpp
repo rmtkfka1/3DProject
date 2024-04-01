@@ -36,7 +36,7 @@ void ConstantBufferTable::CreateBuffer()
 	D3D12_HEAP_PROPERTIES heapProperty = CD3DX12_HEAP_PROPERTIES(D3D12_HEAP_TYPE_UPLOAD);
 	D3D12_RESOURCE_DESC desc = CD3DX12_RESOURCE_DESC::Buffer(bufferSize);
 
-	CORE->GetDevice()->CreateCommittedResource(
+	core->GetDevice()->CreateCommittedResource(
 		&heapProperty,
 		D3D12_HEAP_FLAG_NONE,
 		&desc,
@@ -57,10 +57,10 @@ void ConstantBufferTable::CreateView()
 	cbvDesc.NumDescriptors = _elementCount;
 	cbvDesc.Flags = D3D12_DESCRIPTOR_HEAP_FLAG_NONE;
 	cbvDesc.Type = D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV;
-	CORE->GetDevice()->CreateDescriptorHeap(&cbvDesc, IID_PPV_ARGS(&_cbvHeap));
+	core->GetDevice()->CreateDescriptorHeap(&cbvDesc, IID_PPV_ARGS(&_cbvHeap));
 
 	_cpuHandleBegin = _cbvHeap->GetCPUDescriptorHandleForHeapStart();
-	_handleIncrementSize = CORE->GetDevice()->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV);
+	_handleIncrementSize = core->GetDevice()->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV);
 
 	for (uint32 i = 0; i < _elementCount; ++i)
 	{
@@ -70,7 +70,7 @@ void ConstantBufferTable::CreateView()
 		cbvDesc.BufferLocation = _cbvBuffer->GetGPUVirtualAddress() + static_cast<uint64>(_elementSize) * i;
 		cbvDesc.SizeInBytes = _elementSize;   // CB size is required to be 256-byte aligned.
 
-		CORE->GetDevice()->CreateConstantBufferView(&cbvDesc, cbvHandle);
+		core->GetDevice()->CreateConstantBufferView(&cbvDesc, cbvHandle);
 	}
 }
 

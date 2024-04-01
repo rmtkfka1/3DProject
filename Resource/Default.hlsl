@@ -4,6 +4,11 @@ cbuffer TEST_B0 : register(b0)
     float4 offset3;
 };
 
+cbuffer TEST_B0 : register(b1)
+{
+    float4 offset4;
+};
+
 cbuffer TEST_B1 : register(b5)
 {
     float4 offset1;
@@ -39,6 +44,7 @@ VS_OUT VS_Main(VS_IN input)
     
     output.color = input.color;
     output.color += offset2;
+    output.color += offset4;
     
     
     return output;

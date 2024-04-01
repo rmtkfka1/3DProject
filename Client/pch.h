@@ -64,9 +64,7 @@ using Vec3 = DirectX::SimpleMath::Vector3;
 using Vec4 = DirectX::SimpleMath::Vector4;
 using Matrix = DirectX::SimpleMath::Matrix;
 
-#define CORE Core::GetInstance()
-#define DEVICE Core::GetInstance()->GetDevice()
-#define CMD_LIST Core::GetInstance()->GetCmdList()
+
 
 struct Vertex
 {
@@ -103,3 +101,13 @@ enum
 	CBV_REGISTER_COUNT = CBV_REGISTER::END,
 	REGISTER_COUNT = CBV_REGISTER::END,
 };
+
+#include "KeyManager.h"
+#include "Time.h"
+
+
+
+extern unique_ptr<class Core> core;
+
+#define DEVICE core->GetDevice()
+#define CMD_LIST core->GetCmdList()

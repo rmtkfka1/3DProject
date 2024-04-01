@@ -34,7 +34,7 @@ void ConstantBuffer::CreateBuffer()
 	D3D12_HEAP_PROPERTIES heapProperty = CD3DX12_HEAP_PROPERTIES(D3D12_HEAP_TYPE_UPLOAD);
 	D3D12_RESOURCE_DESC desc = CD3DX12_RESOURCE_DESC::Buffer(bufferSize);
 
-	CORE->GetDevice()->CreateCommittedResource(
+	core->GetDevice()->CreateCommittedResource(
 		&heapProperty,
 		D3D12_HEAP_FLAG_NONE,
 		&desc,
@@ -57,7 +57,7 @@ void ConstantBuffer::PushData(int32 rootParamIndex, void* buffer, uint32 size)
 	::memcpy(&_mappedBuffer[_currentIndex * _elementSize], buffer, size);
 
 	D3D12_GPU_VIRTUAL_ADDRESS address = GetGpuVirtualAddress(_currentIndex);
-	CORE->GetCmdList()->SetGraphicsRootConstantBufferView(rootParamIndex, address);
+	core->GetCmdList()->SetGraphicsRootConstantBufferView(rootParamIndex, address);
 	_currentIndex++;
 }
 

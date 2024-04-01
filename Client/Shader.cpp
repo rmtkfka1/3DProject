@@ -13,7 +13,7 @@ void Shader::Init(const wstring& path)
 	};
 
 	_pipelineDesc.InputLayout = { desc, _countof(desc) };
-	_pipelineDesc.pRootSignature =CORE->GetRootSignature().Get();
+	_pipelineDesc.pRootSignature =core->GetRootSignature().Get();
 
 	_pipelineDesc.RasterizerState = CD3DX12_RASTERIZER_DESC(D3D12_DEFAULT);
 	_pipelineDesc.BlendState = CD3DX12_BLEND_DESC(D3D12_DEFAULT);
@@ -25,12 +25,12 @@ void Shader::Init(const wstring& path)
 	_pipelineDesc.RTVFormats[0] = DXGI_FORMAT_R8G8B8A8_UNORM;
 	_pipelineDesc.SampleDesc.Count = 1;
 
-	CORE->GetDevice()->CreateGraphicsPipelineState(&_pipelineDesc, IID_PPV_ARGS(&_pipelineState));
+	core->GetDevice()->CreateGraphicsPipelineState(&_pipelineDesc, IID_PPV_ARGS(&_pipelineState));
 }
 
 void Shader::SetPipelineState()
 {
-	CORE->GetCmdList()->SetPipelineState(_pipelineState.Get());
+	core->GetCmdList()->SetPipelineState(_pipelineState.Get());
 }
 
 void Shader::CreateShader(const wstring& path, const string& name, const string& version, ComPtr<ID3DBlob>& blob, D3D12_SHADER_BYTECODE& shaderByteCode)

@@ -62,10 +62,11 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
                 DispatchMessage(&msg);
             }
 
-            game->Update();
-            game->Render();
+  
         }
 
+        game->Update();
+        game->Render();
     }
     return (int) msg.wParam;
 }
