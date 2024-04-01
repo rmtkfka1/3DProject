@@ -65,6 +65,8 @@ using Vec4 = DirectX::SimpleMath::Vector4;
 using Matrix = DirectX::SimpleMath::Matrix;
 
 #define CORE Core::GetInstance()
+#define DEVICE Core::GetInstance()->GetDevice()
+#define CMD_LIST Core::GetInstance()->GetCmdList()
 
 struct Vertex
 {
@@ -84,8 +86,20 @@ struct Transform
 	Vec4 offset;
 };
 
+enum class CBV_REGISTER
+{
+	b0,
+	b1,
+	b2,
+	b3,
+	b4,
+
+	END
+};
+
 enum
 {
 	SWAP_CHAIN_BUFFER_COUNT = 2,
-
+	CBV_REGISTER_COUNT = CBV_REGISTER::END,
+	REGISTER_COUNT = CBV_REGISTER::END,
 };

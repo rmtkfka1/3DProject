@@ -20,6 +20,9 @@
     <Filter Include="Resource">
       <UniqueIdentifier>{0c6c7c25-3016-46d8-9924-31e6e0c6ceb6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engien\Buffer">
+      <UniqueIdentifier>{6a48eeff-a982-409b-ba6d-0ddbf63a0e09}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="client.h">
@@ -56,7 +59,13 @@
       <Filter>Engien\Resource</Filter>
     </ClInclude>
     <ClInclude Include="ConstantBuffer.h">
-      <Filter>Engien</Filter>
+      <Filter>Engien\Buffer</Filter>
+    </ClInclude>
+    <ClInclude Include="ConstantBufferTable.h">
+      <Filter>Engien\Buffer</Filter>
+    </ClInclude>
+    <ClInclude Include="TableDescriptorHeap.h">
+      <Filter>Engien\Buffer</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -95,7 +104,13 @@
       <Filter>Engien\Resource</Filter>
     </ClCompile>
     <ClCompile Include="ConstantBuffer.cpp">
-      <Filter>Engien</Filter>
+      <Filter>Engien\Buffer</Filter>
+    </ClCompile>
+    <ClCompile Include="ConstantBufferTable.cpp">
+      <Filter>Engien\Buffer</Filter>
+    </ClCompile>
+    <ClCompile Include="TableDescriptorHeap.cpp">
+      <Filter>Engien\Buffer</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

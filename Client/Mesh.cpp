@@ -19,8 +19,12 @@ void Mesh::Render()
 	CORE->GetCmdList()->IASetVertexBuffers(0, 1, &_vertexBufferView); // Slot: (0~15)
 	CORE->GetCmdList()->IASetIndexBuffer(&_indexBufferView);
 
-	CORE->GetConstantBuffer()->PushData(0, &_transform, sizeof(_transform));
-	CORE->GetConstantBuffer()->PushData(1, &_transform, sizeof(_transform));
+	CORE->GetConstantBuffer()->PushData(5, &_transform, sizeof(_transform));
+	CORE->GetConstantBuffer()->PushData(6, &_transform, sizeof(_transform));
+
+	D3D12_CPU_DESCRIPTOR_HANDLE handle = CORE->GetConstantBufferTable()->PushData( &_transform, sizeof(_transform));
+	CORE->GetTableDescriptorHeap()->SetCBV(handle, CBV_REGISTER::b0);
+	CORE->GetTableDescriptorHeap()->CommitTable();
 
 	CORE->GetCmdList()->DrawIndexedInstanced(_indexCount, 1, 0, 0,0);
 }

@@ -1,5 +1,7 @@
 #pragma once
 #include "ConstantBuffer.h"
+#include "ConstantBufferTable.h"
+#include "TableDescriptorHeap.h"
 
 class Core
 {
@@ -20,6 +22,9 @@ public:
 	ComPtr<ID3D12Device> GetDevice() { return _device; }
 	ComPtr<ID3D12GraphicsCommandList> GetCmdList() { return _cmdList; }
 	shared_ptr<ConstantBuffer> GetConstantBuffer() { return _constantBuffer; }
+	shared_ptr<ConstantBufferTable> GetConstantBufferTable() { return _constantBufferTable; }
+	shared_ptr<TableDescriptorHeap> GetTableDescriptorHeap() { return _tableDescriptorHeap; }
+
 private:
 	Core() {};
 	~Core() {};
@@ -64,6 +69,10 @@ private:
 
 
 	shared_ptr<ConstantBuffer> _constantBuffer;
+	shared_ptr<ConstantBufferTable> _constantBufferTable;
+	shared_ptr<TableDescriptorHeap> _tableDescriptorHeap;
+
+
 
 };
 

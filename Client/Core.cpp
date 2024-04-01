@@ -19,6 +19,12 @@ void Core::Init(const WindowInfo& info)
 	_constantBuffer = make_shared<ConstantBuffer>();
 	_constantBuffer->Init(sizeof(Transform), 256);
 
+	_constantBufferTable = make_shared<ConstantBufferTable>();
+	_constantBufferTable->Init(sizeof(Transform), 256);
+	_tableDescriptorHeap = make_shared<TableDescriptorHeap>();
+	_tableDescriptorHeap->Init(255);
+
+
 
 }
 
@@ -33,7 +39,13 @@ void Core::RenderBegin()
 		D3D12_RESOURCE_STATE_RENDER_TARGET); 
 
 	_cmdList->SetGraphicsRootSignature(_rootSignature.Get());
+
 	_constantBuffer->Clear();
+	_constantBufferTable->Clear();
+	_tableDescriptorHeap->Clear();
+
+	ID3D12DescriptorHeap* descHeap =_tableDescriptorHeap->GetDescriptorHeap().Get();
+	_cmdList->SetDescriptorHeaps(1, &descHeap);
 
 	_cmdList->ResourceBarrier(1, &barrier);
 
@@ -185,11 +197,18 @@ void Core::CreateRootSignature()
 {
 
 
-	CD3DX12_ROOT_PARAMETER param[2];
-	param[0].InitAsConstantBufferView(3);
-	param[1].InitAsConstantBufferView(4);
+	CD3DX12_ROOT_PARAMETER param[3];
 
-	D3D12_ROOT_SIGNATURE_DESC sigDesc = CD3DX12_ROOT_SIGNATURE_DESC(2,param);
+	CD3DX12_DESCRIPTOR_RANGE ranges[] =
+	{
+		CD3DX12_DESCRIPTOR_RANGE(D3D12_DESCRIPTOR_RANGE_TYPE_CBV, CBV_REGISTER_COUNT, 0), // b0~b4
+	};
+
+	param[0].InitAsDescriptorTable(_countof(ranges), ranges);
+	param[1].InitAsConstantBufferView(5);
+	param[2].InitAsConstantBufferView(6);
+
+	D3D12_ROOT_SIGNATURE_DESC sigDesc = CD3DX12_ROOT_SIGNATURE_DESC(3,param);
 	sigDesc.Flags = D3D12_ROOT_SIGNATURE_FLAG_ALLOW_INPUT_ASSEMBLER_INPUT_LAYOUT; // 입력 조립기 단계
 
 	ComPtr<ID3DBlob> blobSignature;
