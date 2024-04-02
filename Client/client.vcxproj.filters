@@ -14,17 +14,20 @@
     <Filter Include="Engien">
       <UniqueIdentifier>{3c11a98e-f8f5-4701-98d8-4cb772046d79}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Engien\Resource">
-      <UniqueIdentifier>{d57a5aa4-470c-45ca-83ad-eac63e1a7fcf}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Resource">
       <UniqueIdentifier>{0c6c7c25-3016-46d8-9924-31e6e0c6ceb6}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Engien\Buffer">
+    <Filter Include="Engien\00.Core">
+      <UniqueIdentifier>{74ab0b91-8364-429c-a553-faab2a1d7b19}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engien\00.Core\Buffer">
       <UniqueIdentifier>{6a48eeff-a982-409b-ba6d-0ddbf63a0e09}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Engien\Manager">
+    <Filter Include="Engien\01.Manager">
       <UniqueIdentifier>{59bb05cd-6694-4eb7-98af-6b797ece23de}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engien\02.Resource">
+      <UniqueIdentifier>{d57a5aa4-470c-45ca-83ad-eac63e1a7fcf}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -46,9 +49,6 @@
     <ClInclude Include="pch.h">
       <Filter>Utils</Filter>
     </ClInclude>
-    <ClInclude Include="Core.h">
-      <Filter>Engien</Filter>
-    </ClInclude>
     <ClInclude Include="d3dx12.h">
       <Filter>Utils</Filter>
     </ClInclude>
@@ -56,25 +56,28 @@
       <Filter>Utils</Filter>
     </ClInclude>
     <ClInclude Include="Shader.h">
-      <Filter>Engien\Resource</Filter>
+      <Filter>Engien\02.Resource</Filter>
     </ClInclude>
     <ClInclude Include="Mesh.h">
-      <Filter>Engien\Resource</Filter>
+      <Filter>Engien\02.Resource</Filter>
     </ClInclude>
     <ClInclude Include="ConstantBuffer.h">
-      <Filter>Engien\Buffer</Filter>
+      <Filter>Engien\00.Core\Buffer</Filter>
     </ClInclude>
     <ClInclude Include="ConstantBufferTable.h">
-      <Filter>Engien\Buffer</Filter>
+      <Filter>Engien\00.Core\Buffer</Filter>
     </ClInclude>
     <ClInclude Include="TableDescriptorHeap.h">
-      <Filter>Engien\Buffer</Filter>
+      <Filter>Engien\00.Core\Buffer</Filter>
     </ClInclude>
     <ClInclude Include="Time.h">
-      <Filter>Engien\Manager</Filter>
+      <Filter>Engien\01.Manager</Filter>
     </ClInclude>
     <ClInclude Include="KeyManager.h">
-      <Filter>Engien\Manager</Filter>
+      <Filter>Engien\01.Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Core.h">
+      <Filter>Engien\00.Core</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -104,28 +107,28 @@
       <Filter>Utils</Filter>
     </ClCompile>
     <ClCompile Include="Shader.cpp">
-      <Filter>Engien\Resource</Filter>
-    </ClCompile>
-    <ClCompile Include="Core.cpp">
-      <Filter>Engien</Filter>
+      <Filter>Engien\02.Resource</Filter>
     </ClCompile>
     <ClCompile Include="Mesh.cpp">
-      <Filter>Engien\Resource</Filter>
+      <Filter>Engien\02.Resource</Filter>
     </ClCompile>
     <ClCompile Include="ConstantBuffer.cpp">
-      <Filter>Engien\Buffer</Filter>
+      <Filter>Engien\00.Core\Buffer</Filter>
     </ClCompile>
     <ClCompile Include="ConstantBufferTable.cpp">
-      <Filter>Engien\Buffer</Filter>
+      <Filter>Engien\00.Core\Buffer</Filter>
     </ClCompile>
     <ClCompile Include="TableDescriptorHeap.cpp">
-      <Filter>Engien\Buffer</Filter>
+      <Filter>Engien\00.Core\Buffer</Filter>
     </ClCompile>
     <ClCompile Include="Time.cpp">
-      <Filter>Engien\Manager</Filter>
+      <Filter>Engien\01.Manager</Filter>
     </ClCompile>
     <ClCompile Include="KeyManager.cpp">
-      <Filter>Engien\Manager</Filter>
+      <Filter>Engien\01.Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="Core.cpp">
+      <Filter>Engien\00.Core</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

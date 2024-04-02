@@ -18,8 +18,8 @@ void Mesh::Render()
 	core->GetCmdList()->IASetVertexBuffers(0, 1, &_vertexBufferView); // Slot: (0~15)
 	core->GetCmdList()->IASetIndexBuffer(&_indexBufferView);
 
-	core->GetConstantBuffer()->PushData(5, &_transform, sizeof(_transform));
-	core->GetConstantBuffer()->PushData(6, &_transform, sizeof(_transform));
+	core->GetConstantBuffer()->PushData(1, &_transform, sizeof(_transform));
+	core->GetConstantBuffer()->PushData(2, &_transform, sizeof(_transform));
 
 	if (KeyManager::GetInstance()->GetButton(KEY_TYPE::D))
 	{

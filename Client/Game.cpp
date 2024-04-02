@@ -25,6 +25,8 @@ void Game::Init(const WindowInfo& info)
 	vector<uint32> index{ 0,1,2,0,2,3 };
 
 	_mesh->Init(vec,index);
+
+
 	_shader->Init(L"..\\Resource\\Default.hlsl");
 
 	TimeManager::GetInstance()->Init();
@@ -34,9 +36,6 @@ void Game::Init(const WindowInfo& info)
 
 void Game::Update()
 {
-
-	KeyManager::GetInstance()->Update();
-	TimeManager::GetInstance()->Update();
 
 	core->Update();
 
@@ -49,8 +48,9 @@ void Game::Render()
 
 	_shader->SetPipelineState();
 
-
 	_mesh->Render();
+
+
 
 	core->RenderEnd();
 

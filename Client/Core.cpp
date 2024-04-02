@@ -30,6 +30,8 @@ void Core::Init(const WindowInfo& info)
 
 void Core::Update()
 {
+	KeyManager::GetInstance()->Update();
+	TimeManager::GetInstance()->Update();
 	ShowFps();
 }
 
@@ -151,6 +153,8 @@ void Core::CreateCommandQueueAndList()
 	_device->CreateCommandQueue(&desc, IID_PPV_ARGS(&_cmdQueue));
 	_device->CreateCommandAllocator(D3D12_COMMAND_LIST_TYPE_DIRECT, IID_PPV_ARGS(&_cmdMemory));
 	_device->CreateCommandList(0, D3D12_COMMAND_LIST_TYPE_DIRECT, _cmdMemory.Get(), nullptr, IID_PPV_ARGS(&_cmdList));
+
+	_cmdList->Close();
 
 	_device->CreateFence(0, D3D12_FENCE_FLAG_NONE, IID_PPV_ARGS(&_fence));
 	_fenceEvent = ::CreateEvent(nullptr, FALSE, FALSE, nullptr);

@@ -29,8 +29,6 @@ private:
 	void WaitSync();
 	void ShowFps();
 
-
-	//장치초기화
 	void CreateDevice();
 	void CreateCommandQueueAndList();
 	void CreateSwapChain();
