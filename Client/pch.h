@@ -1,5 +1,6 @@
 #pragma once
 
+#define _HAS_STD_BYTE 0
 
 #include <windows.h>
 #include <tchar.h>
@@ -70,6 +71,7 @@ struct Vertex
 {
 	Vec3 pos;
 	Vec4 color;
+	Vec2 uv;
 };
 
 struct WindowInfo
@@ -84,7 +86,7 @@ struct Transform
 	Vec4 offset;
 };
 
-enum class CBV_REGISTER
+enum class CBV_REGISTER 
 {
 	b0,
 	b1,
@@ -95,11 +97,23 @@ enum class CBV_REGISTER
 	END
 };
 
+enum class SRV_REGISTER 
+{
+	t0 =static_cast<uint32>(CBV_REGISTER::END),
+	t1,
+	t2,
+	t3,
+	t4,
+	END
+};
+
 enum
 {
 	SWAP_CHAIN_BUFFER_COUNT = 2,
 	CBV_REGISTER_COUNT = CBV_REGISTER::END,
-	REGISTER_COUNT = CBV_REGISTER::END,
+	SRV_REGISTER_COUNT = static_cast<uint32>(SRV_REGISTER::END) - CBV_REGISTER_COUNT,
+	REGISTER_COUNT = CBV_REGISTER_COUNT+ SRV_REGISTER_COUNT,
+
 };
 
 #include "KeyManager.h"

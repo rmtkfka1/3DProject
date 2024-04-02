@@ -3,6 +3,7 @@
 class Core;
 class Mesh;
 class Shader;
+class Texture;
 
 class Game
 {
@@ -19,7 +20,7 @@ private:
 	WindowInfo _windowInfo;
 	shared_ptr<Mesh> _mesh;
 	shared_ptr<Shader> _shader;
-
+	shared_ptr<Texture> _texture;
 
 };
 

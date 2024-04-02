@@ -156,8 +156,25 @@ void Core::CreateCommandQueueAndList()
 
 	_cmdList->Close();
 
+	_device->CreateCommandAllocator(D3D12_COMMAND_LIST_TYPE_DIRECT, IID_PPV_ARGS(&_cmdMemoryTexutre));
+	_device->CreateCommandList(0, D3D12_COMMAND_LIST_TYPE_DIRECT, _cmdMemory.Get(), nullptr, IID_PPV_ARGS(&_cmdListTexture));
+
 	_device->CreateFence(0, D3D12_FENCE_FLAG_NONE, IID_PPV_ARGS(&_fence));
 	_fenceEvent = ::CreateEvent(nullptr, FALSE, FALSE, nullptr);
+}
+
+void Core::FlushResourceCommandQueue()
+{
+	_cmdListTexture->Close();
+
+	ID3D12CommandList* cmdListArr[] = { _cmdListTexture.Get() };
+	_cmdQueue->ExecuteCommandLists(_countof(cmdListArr), cmdListArr);
+
+	WaitSync();
+
+	_cmdMemoryTexutre->Reset();
+	_cmdListTexture->Reset(_cmdMemoryTexutre.Get(), nullptr);
+
 }
 
 void Core::CreateSwapChain()
@@ -217,19 +234,21 @@ void Core::CreateRTVBuffer()
 void Core::CreateRootSignature()
 {
 
+	_samplerDesc = CD3DX12_STATIC_SAMPLER_DESC(0);
 
 	CD3DX12_ROOT_PARAMETER param[3];
 
 	CD3DX12_DESCRIPTOR_RANGE ranges[] =
 	{
 		CD3DX12_DESCRIPTOR_RANGE(D3D12_DESCRIPTOR_RANGE_TYPE_CBV, CBV_REGISTER_COUNT, 0), // b0~b4
+		CD3DX12_DESCRIPTOR_RANGE(D3D12_DESCRIPTOR_RANGE_TYPE_SRV, SRV_REGISTER_COUNT, 0), // t0~t4
 	};
 
 	param[0].InitAsDescriptorTable(_countof(ranges), ranges);
 	param[1].InitAsConstantBufferView(5);
 	param[2].InitAsConstantBufferView(6);
 
-	D3D12_ROOT_SIGNATURE_DESC sigDesc = CD3DX12_ROOT_SIGNATURE_DESC(3,param);
+	D3D12_ROOT_SIGNATURE_DESC sigDesc = CD3DX12_ROOT_SIGNATURE_DESC(3,param,1,&_samplerDesc);
 	sigDesc.Flags = D3D12_ROOT_SIGNATURE_FLAG_ALLOW_INPUT_ASSEMBLER_INPUT_LAYOUT; // 입력 조립기 단계
 
 	ComPtr<ID3DBlob> blobSignature;

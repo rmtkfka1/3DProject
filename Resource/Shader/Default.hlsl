@@ -19,11 +19,15 @@ cbuffer TEST_B2 : register(b6)
     float4 offset2;
 };
 
+Texture2D tex_0 : register(t0);
+SamplerState sam_0 : register(s0);
+
 
 struct VS_IN
 {
     float3 pos : POSITION;
     float4 color : COLOR;
+    float2 uv : TEXCOORD;
   
 };
 
@@ -31,6 +35,7 @@ struct VS_OUT
 {
     float4 pos : SV_Position;
     float4 color : COLOR;
+    float2 uv : TEXCOORD;
 };
 
 
@@ -39,13 +44,10 @@ VS_OUT VS_Main(VS_IN input)
     VS_OUT output;
     
     output.pos = float4(input.pos, 1.0f);
-    output.pos += offset1;
+
     output.pos += offset3;
-    
     output.color = input.color;
-    output.color += offset2;
-    output.color += offset4;
-    
+    output.uv = input.uv;
     
     return output;
     
@@ -53,6 +55,8 @@ VS_OUT VS_Main(VS_IN input)
 
 float4 PS_Main(VS_OUT input):SV_Target
 {
-    return input.color;
+    float4 color = tex_0.Sample(sam_0, input.uv);
+
+    return color;
 
 }

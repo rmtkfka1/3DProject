@@ -1,11 +1,14 @@
 #pragma once
 
+class Texture;
+
 class Mesh
 {
 public:
 	void Init(vector<Vertex>& vec,vector<uint32>& index);
 	void Render();
 	void SetTransform(Transform transform) { _transform = transform; }
+	void SetTexture(shared_ptr<Texture> texture) { _tex = texture; }
 
 private:
 	void CreateVertxBuffer(vector<Vertex>& vec);
@@ -23,5 +26,6 @@ private:
 	uint32 _indexCount = 0;
 
 	Transform _transform = {};
+	shared_ptr<Texture> _tex = {};
 };
 
