@@ -21,25 +21,25 @@ void Mesh::Render()
 	core->GetConstantBuffer()->PushData(1, &_transform, sizeof(_transform));
 	core->GetConstantBuffer()->PushData(2, &_transform, sizeof(_transform));
 
-	if (KeyManager::GetInstance()->GetButton(KEY_TYPE::D))
-	{
-		_transform.offset.x += 1.0f * TimeManager::GetInstance()->GetDeltaTime();
-	}
+	//if (KeyManager::GetInstance()->GetButton(KEY_TYPE::D))
+	//{
+	//	_transform.offset.x += 1.0f * TimeManager::GetInstance()->GetDeltaTime();
+	//}
 
-	if (KeyManager::GetInstance()->GetButton(KEY_TYPE::A))
-	{
-		_transform.offset.x -= 1.0f * TimeManager::GetInstance()->GetDeltaTime();
-	}
+	//if (KeyManager::GetInstance()->GetButton(KEY_TYPE::A))
+	//{
+	//	_transform.offset.x -= 1.0f * TimeManager::GetInstance()->GetDeltaTime();
+	//}
 
-	if (KeyManager::GetInstance()->GetButton(KEY_TYPE::W))
-	{
-		_transform.offset.y += 1.0f * TimeManager::GetInstance()->GetDeltaTime();
-	}
+	//if (KeyManager::GetInstance()->GetButton(KEY_TYPE::W))
+	//{
+	//	_transform.offset.y += 1.0f * TimeManager::GetInstance()->GetDeltaTime();
+	//}
 
-	if (KeyManager::GetInstance()->GetButton(KEY_TYPE::S))
-	{
-		_transform.offset.y -= 1.0f * TimeManager::GetInstance()->GetDeltaTime();
-	}
+	//if (KeyManager::GetInstance()->GetButton(KEY_TYPE::S))
+	//{
+	//	_transform.offset.y -= 1.0f * TimeManager::GetInstance()->GetDeltaTime();
+	//}
 
 	D3D12_CPU_DESCRIPTOR_HANDLE handle = core->GetConstantBufferTable()->PushData( &_transform, sizeof(_transform));
 	core->GetTableDescriptorHeap()->SetCBV(handle, CBV_REGISTER::b0);

@@ -59,8 +59,25 @@ void Game::Render()
 	_shader->SetPipelineState();
 
 	_mesh->SetTexture(_texture);
-	_mesh->Render();
 
+
+
+
+	{
+		Transform t;
+		t.offset = Vec4(0.25f, 0.25f, 0.2f, 0.0f);
+		_mesh->SetTransform(t);
+		_mesh->Render();
+	}
+
+
+	{
+		Transform t;
+		t.offset = Vec4(0.0f, 0.0f, 0.1f, 0.0f);
+		_mesh->SetTransform(t);
+		_mesh->Render();
+
+	}
 
 
 	core->RenderEnd();

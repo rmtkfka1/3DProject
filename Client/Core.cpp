@@ -14,6 +14,7 @@ void Core::Init(const WindowInfo& info)
 	CreateCommandQueueAndList();
 	CreateSwapChain();
 	CreateRTVBuffer();
+	CreateDepthBuffer();
 	CreateRootSignature();
 
 	_constantBuffer = make_shared<ConstantBuffer>();
@@ -23,6 +24,8 @@ void Core::Init(const WindowInfo& info)
 	_constantBufferTable->Init(sizeof(Transform), 256);
 	_tableDescriptorHeap = make_shared<TableDescriptorHeap>();
 	_tableDescriptorHeap->Init(255);
+
+
 
 
 
@@ -63,7 +66,8 @@ void Core::RenderBegin()
 	// Specify the buffers we are going to render to.
 	D3D12_CPU_DESCRIPTOR_HANDLE backBufferView = _rtvHandle[_backBufferIndex];
 	_cmdList->ClearRenderTargetView(backBufferView, Colors::LightSteelBlue, 0, nullptr);
-	_cmdList->OMSetRenderTargets(1, &backBufferView, FALSE, nullptr);
+	_cmdList->OMSetRenderTargets(1, &backBufferView, FALSE, &_dsvHandle);
+	_cmdList->ClearDepthStencilView(_dsvHandle, D3D12_CLEAR_FLAG_DEPTH, 1.0f, 0, 0, nullptr);
 
 }
 
@@ -230,6 +234,41 @@ void Core::CreateRTVBuffer()
 
 
 }
+
+void Core::CreateDepthBuffer()
+{
+	D3D12_HEAP_PROPERTIES heapProperty = CD3DX12_HEAP_PROPERTIES(D3D12_HEAP_TYPE_DEFAULT);
+
+	D3D12_RESOURCE_DESC desc = CD3DX12_RESOURCE_DESC::Tex2D(_dsvFormat, _info.width, _info.height);
+	desc.Flags = D3D12_RESOURCE_FLAG_ALLOW_DEPTH_STENCIL;
+
+	D3D12_CLEAR_VALUE optimize = CD3DX12_CLEAR_VALUE(_dsvFormat, 1.0f, 0);
+
+	_device->CreateCommittedResource(
+		&heapProperty,
+		D3D12_HEAP_FLAG_NONE,
+		&desc,
+		D3D12_RESOURCE_STATE_DEPTH_WRITE,
+		&optimize,
+		IID_PPV_ARGS(&_dsvBuffer)
+	);
+
+
+	D3D12_DESCRIPTOR_HEAP_DESC heapDesc = {};
+	heapDesc.Flags = D3D12_DESCRIPTOR_HEAP_FLAG_NONE;
+	heapDesc.NumDescriptors = 1;
+	heapDesc.Type = D3D12_DESCRIPTOR_HEAP_TYPE_DSV;
+
+	_device->CreateDescriptorHeap(&heapDesc, IID_PPV_ARGS(&_dsvHeap));
+
+	_dsvHandle = _dsvHeap->GetCPUDescriptorHandleForHeapStart();
+	_device->CreateDepthStencilView(_dsvBuffer.Get(), nullptr, _dsvHandle);
+
+
+
+}
+
+
 
 void Core::CreateRootSignature()
 {

@@ -40,6 +40,7 @@ private:
 
 	void CreateSwapChain();
 	void CreateRTVBuffer();
+	void CreateDepthBuffer();
 	void CreateRootSignature();
 
 
@@ -70,10 +71,19 @@ private:
 	array<ComPtr<ID3D12Resource>, SWAP_CHAIN_BUFFER_COUNT> _rtvBuffer;
 	ComPtr<ID3D12DescriptorHeap> _rtvHeap;
 	array< D3D12_CPU_DESCRIPTOR_HANDLE,2> _rtvHandle;
+
+	ComPtr<ID3D12Resource> _dsvBuffer;
+	ComPtr<ID3D12DescriptorHeap> _dsvHeap;
+	D3D12_CPU_DESCRIPTOR_HANDLE _dsvHandle = {};
+	DXGI_FORMAT _dsvFormat = DXGI_FORMAT_D32_FLOAT;
+
+
 	uint8 _backBufferIndex = 0;
 
 	ComPtr<ID3D12RootSignature> _rootSignature;
 	D3D12_STATIC_SAMPLER_DESC _samplerDesc;
+
+
 
 	shared_ptr<ConstantBuffer> _constantBuffer;
 	shared_ptr<ConstantBufferTable> _constantBufferTable;
