@@ -1,10 +1,15 @@
 #include "pch.h"
 #include "Core.h"
-
+#include "Scene.h"
+#include "SceneManager.h"
 void Core::Init(const WindowInfo& info)
 {
 
 	_info = info;
+
+	TimeManager::GetInstance()->Init();
+	KeyManager::GetInstance()->Init(_info.hwnd);
+
 	ResizeWIndow();
 
 	_viewport = { 0, 0, static_cast<FLOAT>(info.width), static_cast<FLOAT>(info.height), 0.0f, 1.0f };
@@ -33,6 +38,19 @@ void Core::Update()
 	KeyManager::GetInstance()->Update();
 	TimeManager::GetInstance()->Update();
 	ShowFps();
+}
+
+void Core::StartGame()
+{
+	RenderBegin();
+
+	SceneManager::GetInstance()->GetActiveScene()->Awake();
+	SceneManager::GetInstance()->GetActiveScene()->Start();
+	SceneManager::GetInstance()->GetActiveScene()->Update();
+	SceneManager::GetInstance()->GetActiveScene()->LateUpdate();
+
+	RenderEnd();
+
 }
 
 void Core::RenderBegin()

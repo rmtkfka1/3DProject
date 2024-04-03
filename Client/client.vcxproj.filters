@@ -103,6 +103,12 @@
     <ClInclude Include="Transform.h">
       <Filter>Engien\03.GameObject</Filter>
     </ClInclude>
+    <ClInclude Include="SceneManager.h">
+      <Filter>Engien\01.Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene.h">
+      <Filter>Engien\01.Manager</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="client.rc">
@@ -174,6 +180,12 @@
     </ClCompile>
     <ClCompile Include="Transform.cpp">
       <Filter>Engien\03.GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneManager.cpp">
+      <Filter>Engien\01.Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene.cpp">
+      <Filter>Engien\01.Manager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

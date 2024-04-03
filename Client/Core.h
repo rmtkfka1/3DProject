@@ -11,6 +11,8 @@ public:
 
 	void Init(const WindowInfo& info);
 	void Update();
+	void StartGame();
+
 	void RenderBegin();
 	void RenderEnd();
 	void FlushResourceCommandQueue();
