@@ -4,6 +4,7 @@ class Core;
 class Mesh;
 class Shader;
 class Texture;
+class GameObject;
 
 class Game
 {
@@ -18,10 +19,10 @@ public:
 private:
 
 	WindowInfo _windowInfo;
-	shared_ptr<Mesh> _mesh;
 
+	shared_ptr<GameObject> _gameObject;
 
-	Transform t1;
+	TransformMatirx t1;
 
 };
 

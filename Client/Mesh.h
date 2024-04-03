@@ -7,8 +7,7 @@ class Mesh
 public:
 	void Init(vector<Vertex>& vec,vector<uint32>& index);
 	void Render();
-	void SetTransform(Transform transform) { _transform = transform; }
-	void SetMaterial(shared_ptr<Material> material) { _material = material; }
+
 
 private:
 	void CreateVertxBuffer(vector<Vertex>& vec);
@@ -25,7 +24,6 @@ private:
 	D3D12_INDEX_BUFFER_VIEW	_indexBufferView = {};
 	uint32 _indexCount = 0;
 
-	Transform _transform = {};
-	shared_ptr<Material> _material;
+
 };
 

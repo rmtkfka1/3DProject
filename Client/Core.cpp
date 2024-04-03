@@ -17,19 +17,12 @@ void Core::Init(const WindowInfo& info)
 	CreateDepthBuffer();
 	CreateRootSignature();
 
-	/*_constantBuffer = make_shared<ConstantBuffer>();
-	_constantBuffer->Init(sizeof(Transform), 256);
 
-	_constantBufferTable = make_shared<ConstantBufferTable>();
-	_constantBufferTable->Init(sizeof(Transform), 256);*/
-
-	CreateConstantBuffer(CBV_REGISTER::b0, sizeof(Transform), 256);
+	CreateConstantBuffer(CBV_REGISTER::b0, sizeof(TransformMatirx), 256);
 	CreateConstantBuffer(CBV_REGISTER::b1, sizeof(MaterialParam), 256);
 
 	_tableDescriptorHeap = make_shared<TableDescriptorHeap>();
 	_tableDescriptorHeap->Init(255);
-
-
 
 
 

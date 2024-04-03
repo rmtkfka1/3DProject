@@ -29,6 +29,9 @@
     <Filter Include="Engien\02.Resource">
       <UniqueIdentifier>{d57a5aa4-470c-45ca-83ad-eac63e1a7fcf}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engien\03.GameObject">
+      <UniqueIdentifier>{f6986f39-0ea3-4700-be28-7206cbe7b63e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="client.h">
@@ -84,6 +87,21 @@
     </ClInclude>
     <ClInclude Include="Material.h">
       <Filter>Engien\02.Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="Component.h">
+      <Filter>Engien\03.GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject.h">
+      <Filter>Engien\03.GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="MeshRenderer.h">
+      <Filter>Engien\03.GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="MonoBeHaviour.h">
+      <Filter>Engien\03.GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Transform.h">
+      <Filter>Engien\03.GameObject</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -141,6 +159,21 @@
     </ClCompile>
     <ClCompile Include="Material.cpp">
       <Filter>Engien\02.Resource</Filter>
+    </ClCompile>
+    <ClCompile Include="Component.cpp">
+      <Filter>Engien\03.GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObject.cpp">
+      <Filter>Engien\03.GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="MeshRenderer.cpp">
+      <Filter>Engien\03.GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="MonoBeHaviour.cpp">
+      <Filter>Engien\03.GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="Transform.cpp">
+      <Filter>Engien\03.GameObject</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

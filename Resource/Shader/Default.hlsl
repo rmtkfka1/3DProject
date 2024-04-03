@@ -51,6 +51,7 @@ VS_OUT VS_Main(VS_IN input)
     output.pos = float4(input.pos, 1.0f);
     
     output.pos += offset0;
+    output.pos.x += float_0;
 
     
     output.color = input.color;

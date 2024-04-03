@@ -81,7 +81,7 @@ struct WindowInfo
 	HWND hwnd;
 };
 
-struct Transform
+struct TransformMatirx
 {
 	Vec4 offset;
 };

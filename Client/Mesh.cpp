@@ -18,11 +18,6 @@ void Mesh::Render()
 	core->GetCmdList()->IASetVertexBuffers(0, 1, &_vertexBufferView); // Slot: (0~15)
 	core->GetCmdList()->IASetIndexBuffer(&_indexBufferView);
 
-
-	core->GetConstantBufferTable(CONSTANT_BUFFER_TYPE::TRANSFORM)->PushData(&_transform, sizeof(_transform));
-
-	_material->Update();
-
 	core->GetTableDescriptorHeap()->CommitTable();
 
 	core->GetCmdList()->DrawIndexedInstanced(_indexCount, 1, 0, 0,0);
