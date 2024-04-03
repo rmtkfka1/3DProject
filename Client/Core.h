@@ -21,10 +21,8 @@ public:
 	ComPtr<ID3D12CommandQueue> GetCmdQueue() { return _cmdQueue; }
 	ComPtr<ID3D12GraphicsCommandList> GetTextureCmdList() { return _cmdListTexture; }
 
-
-	shared_ptr<ConstantBuffer> GetConstantBuffer() { return _constantBuffer; }
-	shared_ptr<ConstantBufferTable> GetConstantBufferTable() { return _constantBufferTable; }
 	shared_ptr<TableDescriptorHeap> GetTableDescriptorHeap() { return _tableDescriptorHeap; }
+	shared_ptr<ConstantBufferTable> GetConstantBufferTable(CONSTANT_BUFFER_TYPE type) { return _constantBufferTable[static_cast<uint8>(type)]; }
 
 
 private:
@@ -43,6 +41,7 @@ private:
 	void CreateDepthBuffer();
 	void CreateRootSignature();
 
+	void CreateConstantBuffer(CBV_REGISTER reg, uint32 bufferSize , uint32 count);
 
 private:
 	D3D12_VIEWPORT _viewport;
@@ -85,8 +84,9 @@ private:
 
 
 
-	shared_ptr<ConstantBuffer> _constantBuffer;
-	shared_ptr<ConstantBufferTable> _constantBufferTable;
+	//shared_ptr<ConstantBuffer> _constantBuffer;
+	//shared_ptr<ConstantBufferTable> _constantBufferTable;
+	vector<shared_ptr<ConstantBufferTable>> _constantBufferTable;
 	shared_ptr<TableDescriptorHeap> _tableDescriptorHeap;
 
 

@@ -86,6 +86,9 @@ struct Transform
 	Vec4 offset;
 };
 
+
+
+
 enum class CBV_REGISTER 
 {
 	b0,
@@ -105,6 +108,22 @@ enum class SRV_REGISTER
 	t3,
 	t4,
 	END
+};
+
+enum
+{
+	MATERIAL_INT_COUNT = 5,
+	MATERIAL_FLOAT_COUNT = 5,
+	MATERIAL_TEXTURE_COUNT = 5
+};
+
+struct MaterialParam
+{
+	void SetInt(uint8 index, int32 value) { intParams[index] = value; }
+	void SetFloat(uint8 index, float value) { floatParams[index] = value; }
+
+	array<int32, MATERIAL_INT_COUNT> intParams;
+	array<float, MATERIAL_FLOAT_COUNT> floatParams;
 };
 
 enum

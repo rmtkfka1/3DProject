@@ -82,6 +82,9 @@
     <ClInclude Include="Texture.h">
       <Filter>Engien\02.Resource</Filter>
     </ClInclude>
+    <ClInclude Include="Material.h">
+      <Filter>Engien\02.Resource</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="client.rc">
@@ -130,10 +133,13 @@
     <ClCompile Include="KeyManager.cpp">
       <Filter>Engien\01.Manager</Filter>
     </ClCompile>
+    <ClCompile Include="Texture.cpp">
+      <Filter>Engien\02.Resource</Filter>
+    </ClCompile>
     <ClCompile Include="Core.cpp">
       <Filter>Engien\00.Core</Filter>
     </ClCompile>
-    <ClCompile Include="Texture.cpp">
+    <ClCompile Include="Material.cpp">
       <Filter>Engien\02.Resource</Filter>
     </ClCompile>
   </ItemGroup>

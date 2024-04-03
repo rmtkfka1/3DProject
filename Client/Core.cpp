@@ -17,11 +17,15 @@ void Core::Init(const WindowInfo& info)
 	CreateDepthBuffer();
 	CreateRootSignature();
 
-	_constantBuffer = make_shared<ConstantBuffer>();
+	/*_constantBuffer = make_shared<ConstantBuffer>();
 	_constantBuffer->Init(sizeof(Transform), 256);
 
 	_constantBufferTable = make_shared<ConstantBufferTable>();
-	_constantBufferTable->Init(sizeof(Transform), 256);
+	_constantBufferTable->Init(sizeof(Transform), 256);*/
+
+	CreateConstantBuffer(CBV_REGISTER::b0, sizeof(Transform), 256);
+	CreateConstantBuffer(CBV_REGISTER::b1, sizeof(MaterialParam), 256);
+
 	_tableDescriptorHeap = make_shared<TableDescriptorHeap>();
 	_tableDescriptorHeap->Init(255);
 
@@ -50,8 +54,8 @@ void Core::RenderBegin()
 
 	_cmdList->SetGraphicsRootSignature(_rootSignature.Get());
 
-	_constantBuffer->Clear();
-	_constantBufferTable->Clear();
+	_constantBufferTable[static_cast<uint8>(CONSTANT_BUFFER_TYPE::TRANSFORM)]->Clear();
+	_constantBufferTable[static_cast<uint8>(CONSTANT_BUFFER_TYPE::MATERIAL)]->Clear();
 	_tableDescriptorHeap->Clear();
 
 	ID3D12DescriptorHeap* descHeap =_tableDescriptorHeap->GetDescriptorHeap().Get();
@@ -275,7 +279,7 @@ void Core::CreateRootSignature()
 
 	_samplerDesc = CD3DX12_STATIC_SAMPLER_DESC(0);
 
-	CD3DX12_ROOT_PARAMETER param[3];
+	CD3DX12_ROOT_PARAMETER param[1];
 
 	CD3DX12_DESCRIPTOR_RANGE ranges[] =
 	{
@@ -284,16 +288,32 @@ void Core::CreateRootSignature()
 	};
 
 	param[0].InitAsDescriptorTable(_countof(ranges), ranges);
-	param[1].InitAsConstantBufferView(5);
-	param[2].InitAsConstantBufferView(6);
+	//param[1].InitAsConstantBufferView(5);
+	//param[2].InitAsConstantBufferView(6);
 
-	D3D12_ROOT_SIGNATURE_DESC sigDesc = CD3DX12_ROOT_SIGNATURE_DESC(3,param,1,&_samplerDesc);
+	D3D12_ROOT_SIGNATURE_DESC sigDesc = CD3DX12_ROOT_SIGNATURE_DESC(_countof(param), param, 1, &_samplerDesc);
 	sigDesc.Flags = D3D12_ROOT_SIGNATURE_FLAG_ALLOW_INPUT_ASSEMBLER_INPUT_LAYOUT; // 입력 조립기 단계
 
 	ComPtr<ID3DBlob> blobSignature;
 	ComPtr<ID3DBlob> blobError;
 	::D3D12SerializeRootSignature(&sigDesc, D3D_ROOT_SIGNATURE_VERSION_1, &blobSignature, &blobError);
 	_device->CreateRootSignature(0, blobSignature->GetBufferPointer(), blobSignature->GetBufferSize(), IID_PPV_ARGS(&_rootSignature));
+
+}
+
+void Core::CreateConstantBuffer(CBV_REGISTER reg, uint32 bufferSize, uint32 count)
+{
+
+	uint8 typeInt = static_cast<uint8>(reg);
+
+	assert(_constantBufferTable.size() == typeInt);
+
+	shared_ptr<ConstantBufferTable> buffer = make_shared<ConstantBufferTable>();
+
+	buffer->Init(reg, bufferSize, count);
+
+	_constantBufferTable.push_back(buffer);
+
 
 }
 
