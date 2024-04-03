@@ -11,12 +11,13 @@ public:
 
 	void Init(const WindowInfo& info);
 	void Update();
-	void StartGame();
+	void Render();
 
 	void RenderBegin();
 	void RenderEnd();
 	void FlushResourceCommandQueue();
 
+	const WindowInfo& GetWindowInfo() { return _info; }
 	ComPtr<ID3D12RootSignature> GetRootSignature() { return _rootSignature; }
 	ComPtr<ID3D12Device> GetDevice() { return _device; }
 	ComPtr<ID3D12GraphicsCommandList> GetCmdList() { return _cmdList; }

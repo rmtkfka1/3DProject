@@ -81,12 +81,10 @@ struct WindowInfo
 	HWND hwnd;
 };
 
-struct TransformMatirx
+struct TransformParam
 {
-	Vec4 offset;
+	Matrix matWVP = Matrix::Identity;
 };
-
-
 
 
 enum class CBV_REGISTER 

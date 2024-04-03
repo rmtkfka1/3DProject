@@ -1,6 +1,6 @@
-cbuffer TEST0 : register(b0)
+cbuffer TRANSFORM_PARAMS : register(b0)
 {
-    float4 offset0;
+    row_major matrix matWVP;
 }
 
 cbuffer MATERIAL_PARAMS : register(b1)
@@ -48,12 +48,8 @@ VS_OUT VS_Main(VS_IN input)
 {
     VS_OUT output;
     
-    output.pos = float4(input.pos, 1.0f);
-    
-    output.pos += offset0;
-    output.pos.x += float_0;
-
-    
+    output.pos = mul(float4(input.pos, 1.0f), matWVP);
+   
     output.color = input.color;
     output.uv = input.uv;
     

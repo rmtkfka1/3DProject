@@ -3,7 +3,7 @@
 #include "Core.h"
 #include "Texture.h"
 #include "Shader.h"
-void Material::Update()
+void Material::PushData()
 {
 
 	core->GetConstantBufferTable(CONSTANT_BUFFER_TYPE::MATERIAL)->PushData(&_materialParams, sizeof(_materialParams));

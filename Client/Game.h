@@ -22,7 +22,7 @@ private:
 
 	shared_ptr<GameObject> _gameObject;
 
-	TransformMatirx t1;
+	TransformParam t1;
 
 };
 

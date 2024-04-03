@@ -22,5 +22,5 @@ void Game::Update()
 
 void Game::Render()
 {
-	core->StartGame();
+	core->Render();
 }

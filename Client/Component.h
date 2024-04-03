@@ -3,7 +3,7 @@ enum class COMPONENT_TYPE : uint8
 {
 	TRANSFORM,
 	MESH_RENDERER,
-	// ...
+	CAMERA,
 	MONO_BEHAVIOUR,
 	END,
 };
@@ -29,6 +29,8 @@ public:
 	shared_ptr<GameObject> GetOwner();
 	shared_ptr<Transform> GetTransform();
 
+
+
 private:
 	friend class GameObject;
 	void SetOwner(shared_ptr<GameObject> gameObject) { _gameObject = gameObject; }
@@ -38,6 +40,7 @@ public:
 	virtual void Start() { }
 	virtual void Update() { }
 	virtual void LateUpdate() { }
+	virtual void FinalUpdate() {};
 
 
 protected:

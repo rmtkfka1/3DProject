@@ -23,7 +23,7 @@ void Core::Init(const WindowInfo& info)
 	CreateRootSignature();
 
 
-	CreateConstantBuffer(CBV_REGISTER::b0, sizeof(TransformMatirx), 256);
+	CreateConstantBuffer(CBV_REGISTER::b0, sizeof(TransformParam), 256);
 	CreateConstantBuffer(CBV_REGISTER::b1, sizeof(MaterialParam), 256);
 
 	_tableDescriptorHeap = make_shared<TableDescriptorHeap>();
@@ -38,16 +38,15 @@ void Core::Update()
 	KeyManager::GetInstance()->Update();
 	TimeManager::GetInstance()->Update();
 	ShowFps();
+
+	SceneManager::GetInstance()->Update();
 }
 
-void Core::StartGame()
+void Core::Render()
 {
 	RenderBegin();
 
-	SceneManager::GetInstance()->GetActiveScene()->Awake();
-	SceneManager::GetInstance()->GetActiveScene()->Start();
-	SceneManager::GetInstance()->GetActiveScene()->Update();
-	SceneManager::GetInstance()->GetActiveScene()->LateUpdate();
+	SceneManager::GetInstance()->Render();
 
 	RenderEnd();
 
