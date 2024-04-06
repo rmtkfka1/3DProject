@@ -1,10 +1,14 @@
 #pragma once
-
+#include "Object.h"
 
 class Material;
-class Mesh
+class Mesh: public Object
 {
 public:
+
+	Mesh();
+	virtual ~Mesh();
+
 	void Init(vector<Vertex>& vec,vector<uint32>& index);
 	void Render();
 

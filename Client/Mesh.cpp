@@ -3,6 +3,12 @@
 #include "Core.h"
 #include "Texture.h"
 #include "Material.h"
+Mesh::Mesh():Object(OBJECT_TYPE::MESH)
+{
+}
+Mesh::~Mesh()
+{
+}
 void Mesh::Init(vector<Vertex>& vec, vector<uint32>& index)
 {
 	CreateVertxBuffer(vec);

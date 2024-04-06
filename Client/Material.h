@@ -1,13 +1,16 @@
 #pragma once
-
+#include "Object.h"
 class Shader;
 class Texture;
 
-class Material
+class Material:public Object
 {
 
 
 public:
+	Material();
+	virtual ~Material();
+
 	shared_ptr<Shader> GetShader() { return _shader; }
 
 	void SetShader(shared_ptr<Shader> shader) { _shader = shader; }

@@ -45,5 +45,7 @@ void TestCameraScript::LateUpdate()
 	}
 
 
+
+
 	GetTransform()->SetLocalPosition(pos);
 }

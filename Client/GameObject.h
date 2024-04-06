@@ -1,12 +1,12 @@
 #pragma once
 #include "Component.h"
-
+#include "Object.h"
 class Transform;
 class MeshRenderer;
 class MonoBeHaviour;
 class Camera;
 
-class GameObject : public enable_shared_from_this<GameObject>
+class GameObject : public Object ,public enable_shared_from_this<GameObject>
 {
 
 public:
